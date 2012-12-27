@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Desobreix::Application.load_tasks
+Descobreix::Application.load_tasks
