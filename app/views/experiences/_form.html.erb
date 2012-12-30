@@ -1,0 +1,43 @@
+<%= form_for(@experience) do |f| %>
+  <% if @experience.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@experience.errors.count, "error") %> prohibited this experience from being saved:</h2>
+
+      <ul>
+      <% @experience.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.collection_select(:city_id, City.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :categories %><br />
+    <% for category in Category.all %>
+      <div>
+        <%= check_box_tag "experience[category_ids][]", category.id, @experience.categories.include?(category) %>
+        <%= category.name %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

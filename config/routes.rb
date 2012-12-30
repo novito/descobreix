@@ -1,4 +1,19 @@
 Descobreix::Application.routes.draw do
+
+  
+
+  resources :categories
+
+
+  resources :cities
+
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  resources :languages
+  resources :experiences
+
+
   devise_for :users
 
   # The priority is based upon order of creation:
