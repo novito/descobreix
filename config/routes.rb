@@ -1,21 +1,18 @@
 Descobreix::Application.routes.draw do
 
-  
-
-  resources :categories
-
-
-  resources :cities
-
-
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  devise_for :users, :path_prefix => 'my'
+
+  resources :users, :only => ["show"] do
+    resources :experiences
+  end
 
   resources :languages
   resources :experiences
+  resources :categories
+  resources :cities
 
-
-  devise_for :users
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

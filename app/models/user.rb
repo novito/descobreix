@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :language_ids
+  
   # attr_accessible :title, :body
   has_many :proficiencies, :dependent => :destroy
   has_many :languages, :through => :proficiencies
+  has_many :experiences
 end

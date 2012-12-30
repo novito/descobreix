@@ -34,7 +34,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1/edit
   def edit
-    @experience = Experience.find(params[:id])
+    @experience = current_user.experiences.find(params[:id])
   end
 
   # POST /experiences
@@ -58,7 +58,7 @@ class ExperiencesController < ApplicationController
   # PUT /experiences/1.json
   def update
     params[:experience][:category_ids] ||= []
-    @experience = Experience.find(params[:id])
+    @experience = current_user.experience.find(params[:id])
 
     respond_to do |format|
       if @experience.update_attributes(params[:experience])
@@ -74,7 +74,7 @@ class ExperiencesController < ApplicationController
   # DELETE /experiences/1
   # DELETE /experiences/1.json
   def destroy
-    @experience = Experience.find(params[:id])
+    @experience = current_user.experiences.find(params[:id])
     @experience.destroy
 
     respond_to do |format|
