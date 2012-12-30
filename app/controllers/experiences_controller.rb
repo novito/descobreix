@@ -2,6 +2,9 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.json
   def index
+    if params[:user_id]
+      @experiences_user = User.find(params[:user_id])
+    end
     @experiences = Experience.all
 
     respond_to do |format|

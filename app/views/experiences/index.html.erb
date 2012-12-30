@@ -1,21 +1,26 @@
-<h1>Listing experiences</h1>
+<% if @experience_user %>
+  <h1>Experiences of <%= @experience_user.email %></h1>
+<% else %>
+  <h1>Listing experiences</h1>
+<% end %>
 
 <table class="table table-striped">
   <tr>
     <th>Title</th>
     <th>Description</th>
     <th>Categories</th>
+    <th>City</th>
     <th>Actions</th>
   </tr>
 
 <% @experiences.each do |experience| %>
   <tr>
-    <td><%= experience.title %></td>
+    <td><%= link_to experience.title, experience_path(experience) %></td>
     <td><%= experience.description %></td>
     <td>
       <%= experience.categories.map { |c| c.name }.join ', ' %>
     </td>
-
+    <td><%= experience.city.name %>
     <td><%= link_to 'Show', experience %>
     <% if visitor_is_current_user? experience.user %>
       <%= link_to 'Edit', edit_experience_path(experience) %>
