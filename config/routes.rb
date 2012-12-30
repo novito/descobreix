@@ -4,7 +4,7 @@ Descobreix::Application.routes.draw do
   devise_for :users, :path_prefix => 'my'
 
   resources :users, :only => ["show"] do
-    resources :experiences
+    resources :experiences, :only => ["index"]
   end
 
   resources :languages
