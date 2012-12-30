@@ -58,7 +58,7 @@ class ExperiencesController < ApplicationController
   # PUT /experiences/1.json
   def update
     params[:experience][:category_ids] ||= []
-    @experience = current_user.experience.find(params[:id])
+    @experience = current_user.experiences.find(params[:id])
 
     respond_to do |format|
       if @experience.update_attributes(params[:experience])
