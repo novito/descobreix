@@ -12,5 +12,5 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :proficiencies, :dependent => :destroy
   has_many :languages, :through => :proficiencies
-  has_many :experiences
+  has_many :experiences, :dependent => :destroy
 end

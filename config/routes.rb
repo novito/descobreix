@@ -9,8 +9,6 @@ Descobreix::Application.routes.draw do
 
   resources :languages
   resources :experiences
-  resources :categories
-  resources :cities
 
   
   # The priority is based upon order of creation:
