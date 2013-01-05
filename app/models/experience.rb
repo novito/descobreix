@@ -12,20 +12,22 @@ class Experience < ActiveRecord::Base
   # Arel helpers
   class << self
     def by_city(city)
-      where(['city_id = ?', city])
+      where(['experiences.city_id = ?', city])
     end
-    def by_title(title)
-   	  where('title LIKE ? OR description LIKE ?', "%#{title}%", "%#{title}%")
+    def by_keywords(keywords)
+   	  where("experiences.title LIKE ? OR experiences.description LIKE ?", "%#{keywords}%", "%#{keywords}%")
     end
     def by_categories(categories)
+      joins(:categories).where('category_id IN (?)', categories)
     end
   end
 
 
   def self.search(search_params)
   	experiences = scoped
-  	experiences = experiences.by_title(search_params[:title]) if search_params[:title]
-  	experiences = experiences.by_city(search_params[:city]) if search_params[:city]
+  	experiences = experiences.by_keywords(search_params[:keywords]) if search_params[:keywords]
+  	experiences = experiences.by_city(search_params[:city]) if search_params[:city] && !search_params[:city].blank?
+    experiences = experiences.by_categories(search_params[:categories]) if search_params[:categories]
   	return experiences
   end
 

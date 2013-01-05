@@ -8,11 +8,20 @@
   <p>
     <div class="field">
       <%= label_tag :keywords %>
-      <%= text_field_tag :title, params[:title] %>
+      <%= text_field_tag :keywords, params[:keywords] %>
     </div>
     <div class="field">
       <%= label_tag :city %>
-      <%= select_tag :city, options_from_collection_for_select(City.all, :id, :name, params[:city].to_i), :prompt => 'Select a city' %>
+      <%= select_tag :city, options_from_collection_for_select(City.all, :id, :name, params[:city].to_i), :prompt => 'In all cities' %>
+    </div>
+    <div class="field">
+      <%= label_tag :categories %>
+      <% for category in Category.all %>
+        <div>
+          <%= check_box_tag "categories[]", category.id, (params[:categories].include?(category.id.to_s) if params[:categories]) %>
+          <%= category.name %>
+        </div>
+      <% end %>
     </div>
     <%= submit_tag "Search", :name => nil %>
   </p>
