@@ -1,0 +1,12 @@
+<h1> Find experiences </h1>
+<%= form_tag results_experiences_path, :method => "get", :class => "well form-search" do  %>
+  <div class="field">
+  	<%= label_tag "City" %>
+    <%= collection_select(:city, City.all, :id, :name) %>
+  </div>
+  <%= label_tag "Categories" %>
+  <%= button_tag :class => "btn btn-large" do %>
+    <i class="icon-search"></i>
+    Find Experience
+  <% end %>
+<% end %>

@@ -4,6 +4,20 @@
   <h1>Listing experiences</h1>
 <% end %>
 
+<%= form_tag experiences_path, :method => 'get' do %>
+  <p>
+    <div class="field">
+      <%= label_tag :keywords %>
+      <%= text_field_tag :title, params[:title] %>
+    </div>
+    <div class="field">
+      <%= label_tag :city %>
+      <%= select_tag :city, options_from_collection_for_select(City.all, :id, :name, params[:city].to_i), :prompt => 'Select a city' %>
+    </div>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table class="table table-striped">
   <tr>
     <th>Title</th>
@@ -32,6 +46,4 @@
 </table>
 
 <br />
-<% if user_signed_in? %>
-  <%= link_to 'New Experience', new_experience_path %>
-<% end %>
+<%= will_paginate @experiences %>

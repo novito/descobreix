@@ -5,7 +5,7 @@ class ExperiencesController < ApplicationController
     if params[:user_id]
       @experiences_user = User.find(params[:user_id])
     end
-    @experiences = Experience.all
+    @experiences = Experience.search(params).paginate(:per_page => 5, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
